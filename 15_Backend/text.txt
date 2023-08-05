@@ -1,0 +1,9 @@
+web sokket - bu foydalanuvchilani rial timeda ushlab beruvchi tul
+
+Soket bu -> HANDSHAKE  db cunvose boladi yani sorashish
+
+Userlar orasida event emitirlar ustiga qurilgan
+
+socket = faqat oziga yuboradi
+io = hamaga va oziga
+socket.brodcast = ozidan bowqa hamaga

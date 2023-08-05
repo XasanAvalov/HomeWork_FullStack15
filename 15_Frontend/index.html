@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO public chat</title>
+</head>
+<body>
+    
+    <div style="position: absolute; top: 5%; "></div>
+    
+    <form >
+        <h3>Enter your name to continue: <input  type="text" id="name" placeholder="enter name" required><br></h3>
+        
+        
+        <div style="margin-top: 20%;">
+            <h3>Message <input style="padding-left: 7%;" type="text" name="" id="text" required> <input type="submit" value="submit"></h3>
+            
+        </div>
+    </form>
+
+    
+</body>
+<script type="module">
+    import { io } from "http://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+
+    const socket = io("http://localhost:5000");
+
+
+    const form = document.querySelector("form");
+    const div = document.querySelector("div");
+    const inputText = document.getElementById("text")
+    const inputName = document.getElementById("name")
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        socket.emit("submit", { message: inputText.value, name: inputName.value})
+
+
+        inputText.value = "";
+    });
+
+    socket.on("response", ({message, user}) => {
+        div.innerHTML += `<br>\n${user}: ` + message;
+    })
+</script>
+</html>
